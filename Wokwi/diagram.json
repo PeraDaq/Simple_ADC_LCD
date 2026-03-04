@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "author": "Mohanad Sharif",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": -85.8, "left": -19.8, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 17.9, "left": 287.8, "attrs": {} },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic1",
+      "top": -259.4,
+      "left": 26.95,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 160,
+      "left": -23.2,
+      "attrs": { "pins": "i2c" }
+    }
+  ],
+  "connections": [
+    [ "pot1:GND", "uno:GND.3", "black", [ "v57.6", "h-157.6" ] ],
+    [ "pot1:VCC", "uno:5V", "red", [ "v48", "h-192.8" ] ],
+    [ "pot1:SIG", "uno:A0", "gold", [ "v38.4", "h-144.4" ] ],
+    [ "logic1:GND", "uno:GND.1", "black", [ "v38.4", "h-48.3" ] ],
+    [ "logic1:D0", "uno:A5.2", "white", [ "v0" ] ],
+    [ "logic1:D1", "uno:A4.2", "gray", [ "v0" ] ],
+    [ "logic1:D2", "uno:13", "magenta", [ "v19.2", "h19.2", "v38.4" ] ],
+    [ "lcd1:GND", "uno:GND.2", "black", [ "h-9.6", "v-57.6", "h92.1" ] ],
+    [ "lcd1:VCC", "uno:5V", "red", [ "h-19.2", "v-76.7", "h92.2" ] ],
+    [ "lcd1:SDA", "uno:A4.2", "gray", [ "h-105.6", "v-326.2", "h115.2" ] ],
+    [ "lcd1:SCL", "uno:A5.2", "white", [ "h-115.2", "v-345.3", "h115.2" ] ]
+  ],
+  "dependencies": {}
+}
