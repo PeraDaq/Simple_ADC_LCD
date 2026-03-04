@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+author = "Mohanad Sharif"
+title = "Simple ADC LCD"
+description = "ADC input from potentiometer displayed on I2C LCD1602"
+board = "uno"
+firmware = "../.pio/build/nanoatmega328/firmware.hex"
+elf = '../.pio/build/nanoatmega328/firmware.elf'
