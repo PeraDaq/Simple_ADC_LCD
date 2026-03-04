@@ -19,6 +19,22 @@
       "top": 160,
       "left": -23.2,
       "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -110.95,
+      "left": 267.4,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -135.6,
+      "left": 342.6,
+      "rotate": 90,
+      "attrs": { "color": "blue" }
     }
   ],
   "connections": [
@@ -32,7 +48,10 @@
     [ "lcd1:GND", "uno:GND.2", "black", [ "h-9.6", "v-57.6", "h92.1" ] ],
     [ "lcd1:VCC", "uno:5V", "red", [ "h-19.2", "v-76.7", "h92.2" ] ],
     [ "lcd1:SDA", "uno:A4.2", "gray", [ "h-105.6", "v-326.2", "h115.2" ] ],
-    [ "lcd1:SCL", "uno:A5.2", "white", [ "h-115.2", "v-345.3", "h115.2" ] ]
+    [ "lcd1:SCL", "uno:A5.2", "white", [ "h-115.2", "v-345.3", "h115.2" ] ],
+    [ "r1:1", "led1:A", "blue", [ "v0" ] ],
+    [ "r1:2", "uno:8", "blue", [ "v0", "h-114" ] ],
+    [ "led1:C", "uno:GND.1", "black", [ "v19.6", "h-249.9" ] ]
   ],
   "dependencies": {}
 }

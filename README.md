@@ -2,6 +2,24 @@
 
 A small Arduino/PlatformIO project that reads an analog input from a potentiometer and shows both the raw ADC value and calculated voltage on a 16x2 I2C LCD.
 
+## Quick Start (Daily Use)
+
+Use this if you just want the fastest workflow:
+
+```bash
+# 1) Build firmware for Wokwi simulation
+pio run -e uno_sim
+
+# 2) Flash hardware Nano (parallel LCD firmware)
+pio run -e nanoatmega328 -t upload
+```
+
+Optional (live serial output from Nano):
+
+```bash
+pio device monitor -b 9600
+```
+
 ## What it does
 
 - Reads analog input on `A0`.
@@ -34,6 +52,7 @@ A small Arduino/PlatformIO project that reads an analog input from a potentiomet
 ## Project structure
 
 - `src/sketch.ino` - main firmware logic
+- `Wokwi/main_do_not_use.cpp` - parallel LCD firmware used for physical Nano target
 - `platformio.ini` - PlatformIO environment + libraries
 - `Wokwi/diagram.json` - simulation wiring and parts
 - `Wokwi/wokwi.toml` - Wokwi firmware mapping
@@ -47,16 +66,40 @@ Configured in `platformio.ini`:
 
 ## Build and run (PlatformIO)
 
+### Environment mapping
+
+- `uno_sim`:
+  - Board: Arduino Uno
+  - Source: `src/sketch.ino` (I2C LCD simulation firmware)
+  - Used by Wokwi via `Wokwi/wokwi.toml`
+- `nanoatmega328`:
+  - Board: Arduino Nano (new bootloader)
+  - Source: `Wokwi/main_do_not_use.cpp` (parallel LCD hardware firmware)
+
+### Common commands
+
 From the project root:
 
 ```bash
 pio run
 ```
 
+Build simulation firmware explicitly:
+
+```bash
+pio run -e uno_sim
+```
+
+Build Nano firmware explicitly:
+
+```bash
+pio run -e nanoatmega328
+```
+
 If you are using a connected board:
 
 ```bash
-pio run -t upload
+pio run -e nanoatmega328 -t upload
 ```
 
 If you are using a Python virtual environment for PlatformIO, activate it first:
@@ -68,14 +111,14 @@ source /home/mopi5/pio-env/bin/activate
 ## Run in Wokwi
 
 1. Build firmware first:
-   - `pio run`
+  - `pio run -e uno_sim`
 2. Open the Wokwi project files in the `Wokwi/` folder.
 3. Start simulation.
 
 `Wokwi/wokwi.toml` points to the generated firmware:
 
-- `../.pio/build/nanoatmega328/firmware.hex`
-- `../.pio/build/nanoatmega328/firmware.elf`
+- `../.pio/build/uno_sim/firmware.hex`
+- `../.pio/build/uno_sim/firmware.elf`
 
 ## Notes
 
@@ -91,8 +134,9 @@ source /home/mopi5/pio-env/bin/activate
 
 The following commands were run successfully for this project today:
 
-- `pio run`
-- `pio run -t upload`
+- `pio run -e uno_sim`
+- `pio run -e nanoatmega328`
+- `pio run -e nanoatmega328 -t upload`
 
 ## Troubleshooting
 
@@ -105,8 +149,11 @@ The following commands were run successfully for this project today:
   - Verify potentiometer `SIG` is connected to `A0`.
   - Confirm potentiometer ends are connected to `5V` and `GND`.
 - Wokwi simulation not reflecting latest firmware:
-  - Rebuild with `pio run` before starting simulation.
-  - Confirm `Wokwi/wokwi.toml` firmware paths point to `.pio/build/nanoatmega328/` outputs.
+  - Rebuild with `pio run -e uno_sim` before starting simulation.
+  - Confirm `Wokwi/wokwi.toml` firmware paths point to `.pio/build/uno_sim/` outputs.
+- Wokwi reports TOML parse errors (for example: unknown character at row/col):
+  - Ensure `Wokwi/wokwi.toml` uses valid TOML syntax.
+  - Do not use `;` style comments in this file.
 
 ## Author
 
