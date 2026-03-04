@@ -5,11 +5,12 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2);   // Change to 0x3F if your module uses that address
 
 const int adcPin = A0;
+const int ledPin = 8;
 
 void setup() {
   lcd.init();
   lcd.backlight();
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
@@ -17,11 +18,11 @@ void loop() {
   float voltage = adcValue * (5.0 / 1023.0);
 
   // turn the ledPin on
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(ledPin, HIGH);
   // stop the program for <sensorValue> milliseconds:
   delay(adcValue);
   // turn the ledPin off:
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(ledPin, LOW);
   // stop the program for <sensorValue> milliseconds:
   delay(adcValue);
 
