@@ -1,5 +1,8 @@
 # Simple ADC LCD
 
+<img width="1127" height="758" alt="snip" src="https://github.com/user-attachments/assets/73e00980-88f3-425f-bcf8-37e36074b7a0" />
+
+
 A small Arduino/PlatformIO project that reads an analog input from a potentiometer and shows both the raw ADC value and calculated voltage on a 16x2 I2C LCD.
 
 ## Quick Start (Daily Use)
