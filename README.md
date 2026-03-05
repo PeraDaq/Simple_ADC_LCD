@@ -47,7 +47,7 @@ pio device monitor -b 9600
 ### Software Requirements
 - Python 3.7+
 - PlatformIO CLI: `pip install platformio`
-- Arduino IDE (optional, for standalone development)
+- VSC or Arduino IDE (optional, for standalone development)
 
 ### For Simulation
 - Wokwi.com account (free)
@@ -95,9 +95,9 @@ Simple_ADC_LCD/
 ├── README.md                    # Main project documentation
 ├── platformio.ini               # PlatformIO configuration (2 environments)
 ├── src/
-│   └── sketch.ino              # I2C LCD firmware (Wokwi simulation)
+│   └── uno_sketch.ino          # I2C LCD firmware (Wokwi simulation)
 ├── Wokwi/
-│   ├── main_do_not_use.cpp     # Parallel LCD firmware (Hardware Nano)
+│   ├── nano_main.cpp           # Parallel LCD firmware (Hardware Nano)
 │   ├── diagram.json             # Wokwi circuit diagram
 │   └── wokwi.toml               # Wokwi firmware mapping
 ├── docs/
@@ -123,14 +123,14 @@ Configured in `platformio.ini`:
 
 **Environment 1: Wokwi Simulation (Arduino Uno with I2C LCD)**
 - Board: Arduino Uno
-- Source: `src/sketch.ino`
+- Source: `src/uno_sketch.ino`
 - LCD Type: I2C (LiquidCrystal_I2C library)
 - LCD Address: 0x27 (configurable to 0x3F)
 - Use Case: Quick testing, circuit verification
 
 **Environment 2: Hardware Nano (Physical Deployment)**
 - Board: Arduino Nano (new bootloader)
-- Source: `Wokwi/main_do_not_use.cpp`
+- Source: `Wokwi/nano_main.cpp`
 - LCD Type: Parallel (LiquidCrystal library)
 - LCD Pins: RS=12, E=11, D4=5, D5=4, D6=3, D7=2
 - Use Case: Real hardware deployment
