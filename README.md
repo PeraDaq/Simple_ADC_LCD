@@ -110,6 +110,12 @@ Simple_ADC_LCD/
 └── API.md                       # API reference
 ```
 
+## Student Learning Docs
+
+- [ADC Explained](docs/ADC_EXPLAINED.md)
+- [I2C Protocol](docs/I2C_PROTOCOL.md)
+- [Wokwi Setup](docs/WOKWI_SETUP.md)
+
 ## 📚 Dependencies
 
 Configured in `platformio.ini`:
