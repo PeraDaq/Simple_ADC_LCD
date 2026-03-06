@@ -92,27 +92,31 @@ pio device monitor -b 9600
 
 ```
 Simple_ADC_LCD/
+│
 ├── .gitignore                 # Git ignore rules
-├── README.md                    # Main project documentation
-├── platformio.ini               # PlatformIO configuration (2 environments)
+├── README.md                   # Main project documentation
+├── platformio.ini              # PlatformIO configuration (2 environments)
+│
 ├── docs/
 │   ├── ADC_EXPLAINED.md
-│   ├── API.md                   # API reference
-│   ├── CHANGELOG.md             # Version history
-│   ├── CONTRIBUTING.md          # Contribution guidelines
+│   ├── API.md                  # API reference
+│   ├── CHANGELOG.md            # Version history
+│   ├── CONTRIBUTING.md         # Contribution guidelines
 │   ├── HARDWARE.md
 │   ├── I2C_PROTOCOL.md
-│   ├── LICENSE.md               # MIT License
+│   ├── LICENSE.md              # MIT License
 │   ├── WOKWI_SETUP.md
 │   └── WORKLOG.md
+│
 ├── src/
-│   └── uno_sketch.ino          # I2C LCD firmware (Wokwi simulation)
+│   └── uno_sketch.ino         # I2C LCD firmware (Wokwi simulation)
+│
 └── Wokwi/
-      ├── nano_main.cpp          # Parallel LCD firmware (Hardware Nano)
-      ├── diagram.json           # Wokwi circuit diagram
-      ├── libraries.txt
-      ├── wokwi-project.txt
-      └── wokwi.toml             # Wokwi firmware mapping
+   ├── nano_main.cpp          # Parallel LCD firmware (Hardware Nano)
+   ├── diagram.json           # Wokwi circuit diagram
+   ├── libraries.txt
+   ├── wokwi-project.txt
+   └── wokwi.toml             # Wokwi firmware mapping
 ```
 
 ## Student Learning Docs
