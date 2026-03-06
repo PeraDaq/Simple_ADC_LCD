@@ -94,14 +94,8 @@ pio device monitor -b 9600
 Simple_ADC_LCD/
 ├── README.md                    # Main project documentation
 ├── platformio.ini               # PlatformIO configuration (2 environments)
-├── include/
-│   └── README
-├── lib/
-│   └── README
 ├── src/
 │   └── uno_sketch.ino          # I2C LCD firmware (Wokwi simulation)
-├── test/
-│   └── README
 ├── Wokwi/
 │   ├── nano_main.cpp           # Parallel LCD firmware (Hardware Nano)
 │   ├── diagram.json             # Wokwi circuit diagram
