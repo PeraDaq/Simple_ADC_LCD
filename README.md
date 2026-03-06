@@ -94,20 +94,31 @@ pio device monitor -b 9600
 Simple_ADC_LCD/
 ├── README.md                    # Main project documentation
 ├── platformio.ini               # PlatformIO configuration (2 environments)
+├── include/
+│   └── README
+├── lib/
+│   └── README
 ├── src/
 │   └── uno_sketch.ino          # I2C LCD firmware (Wokwi simulation)
+├── test/
+│   └── README
 ├── Wokwi/
 │   ├── nano_main.cpp           # Parallel LCD firmware (Hardware Nano)
 │   ├── diagram.json             # Wokwi circuit diagram
-│   └── wokwi.toml               # Wokwi firmware mapping
+│   ├── libraries.txt
+│   ├── wokwi-project.txt
+│   ├── wokwi.toml               # Wokwi firmware mapping
+│   └── wokwi.vcd
 ├── docs/
 │   ├── ADC_EXPLAINED.md
+│   ├── API.md                   # API reference
+│   ├── CHANGELOG.md             # Version history
+│   ├── CONTRIBUTING.md          # Contribution guidelines
+│   ├── HARDWARE.md
 │   ├── I2C_PROTOCOL.md
-│   └── WOKWI_SETUP.md
-├── CONTRIBUTING.md              # Contribution guidelines
-├── CHANGELOG.md                 # Version history
-├── LICENSE.md                   # MIT License
-└── API.md                       # API reference
+│   ├── LICENSE.md               # MIT License
+│   ├── WOKWI_SETUP.md
+│   └── WORKLOG.md
 ```
 
 ## Student Learning Docs
@@ -262,14 +273,12 @@ If LCD doesn't respond:
 ### LCD shows nothing
 - **Check Power**: Verify VCC/GND connections
 - **Backlight**: Adjust potentiometer on LCD module back
-- **I2C Lines**: Ensure SDA (A4) and SCL (A5) are connected
 - **I2C Address**: Try both 0x27 and 0x3F in code
 
 ### Wrong characters or corrupted display
 - **LCD Address**: Check I2C address in code
 - **LCD Type**: Verify 16x2 module (some use different formats)
 - **Power Supply**: Weak power can cause display corruption
-- **Cable Length**: Long I2C cables can cause signal issues
 
 ### ADC value doesn't change
 - **Potentiometer Connection**: Verify SIG → A0
@@ -308,16 +317,15 @@ The following commands were tested successfully:
 
 Comprehensive documentation is available:
 
-- **[API.md](API.md)** - Function reference, parameters, and return values
-- **[GETTING_STARTED.md](GETTING_STARTED.md)** - Setup guide for beginners
-- **[HARDWARE.md](HARDWARE.md)** - Detailed hardware specifications and circuit diagrams
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Code architecture and design patterns
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Development guidelines and contribution process
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
-- **[LICENSE.md](LICENSE.md)** - MIT License terms
-- **docs/ADC_EXPLAINED.md** - ADC conversion theory and calibration
-- **docs/I2C_PROTOCOL.md** - I2C communication details
-- **docs/WOKWI_SETUP.md** - Wokwi simulation guide
+- **[API.md](docs/API.md)** - Function reference, parameters, and return values
+- **[HARDWARE.md](docs/HARDWARE.md)** - Detailed hardware specifications and circuit diagrams
+- **[CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Development guidelines and contribution process
+- **[CHANGELOG.md](docs/CHANGELOG.md)** - Version history and release notes
+- **[LICENSE.md](docs/LICENSE.md)** - MIT License terms
+- **[ADC_EXPLAINED.md](docs/ADC_EXPLAINED.md)** - ADC conversion theory and calibration
+- **[I2C_PROTOCOL.md](docs/I2C_PROTOCOL.md)** - I2C communication details
+- **[WOKWI_SETUP.md](docs/WOKWI_SETUP.md)** - Wokwi simulation guide
+- **[WORKLOG.md](docs/WORKLOG.md)** - Development notes and progress log
 
 ## 👤 Author
 
@@ -325,4 +333,4 @@ Comprehensive documentation is available:
 
 ## 📄 License
 
-MIT License - See [LICENSE.md](LICENSE.md)
+MIT License - See [LICENSE.md](docs/LICENSE.md)
