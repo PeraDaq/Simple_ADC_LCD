@@ -42,3 +42,20 @@
 - Resolved Wokwi TOML parse issue caused by invalid comment syntax:
 	- Error observed: unknown character in `wokwi.toml`.
 	- Removed/comment-normalized unsupported lines and left only valid TOML content.
+
+## 2026-03-06
+
+- Reorganized documentation structure by moving API reference from project root into `docs/API.md`.
+- Performed README consistency cleanup:
+	- Corrected project tree after documentation/file moves.
+	- Fixed stale links to moved docs (`API.md`, `LICENSE.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, `HARDWARE.md`).
+	- Removed malformed/stray lines accidentally introduced in the troubleshooting section.
+	- Reformatted the project tree with grouped spacing and standardized indentation for readability.
+- Refined tracking policy and repository hygiene:
+	- Removed generated simulation artifact `Wokwi/wokwi.vcd` from version control.
+	- Added ignore rule for `Wokwi/wokwi.vcd` in `.gitignore` to prevent future re-tracking.
+	- Confirmed `Wokwi/libraries.txt` remains tracked as a reproducibility/config file.
+- Verified `platformio.ini` dependency usage:
+	- Confirmed `uno_sim` uses only `LiquidCrystal_I2C`.
+	- Removed unnecessary `LiquidCrystal` dependency from `[env:uno_sim]`.
+- Published incremental documentation maintenance commits to `origin/main` to keep history reviewable.
