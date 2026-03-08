@@ -4,4 +4,4 @@ include/
 lib/
 test/
 Wokwi/wokwi.vcd
-GIT_WORKFLOW_NOTES.md
+docs/GIT_WORKFLOW_NOTES.md
