@@ -8,6 +8,7 @@ const int adcPin = A0;
 const int ledPin = 8;
 
 void setup() {
+  Serial.begin(9600);
   lcd.init();
   lcd.backlight();
   pinMode(ledPin, OUTPUT);
@@ -36,6 +37,12 @@ void loop() {
   lcd.print("Volt: ");
   lcd.print(voltage, 3);
   lcd.print(" V");
+
+  // Teleplot over serial requires the ">" prefix.
+  Serial.print(">adc:");
+  Serial.println(adcValue);
+  Serial.print(">volt:");
+  Serial.println(voltage, 3);
 
   delay(200);
 }

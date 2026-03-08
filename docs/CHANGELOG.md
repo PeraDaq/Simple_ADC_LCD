@@ -9,8 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Planned Features
+### Added (Unreleased)
 
+- Teleplot-compatible serial telemetry output in both firmware targets:
+  - `>adc:<value>`
+  - `>volt:<value>`
+- New monitoring documentation:
+  - `README.md` Teleplot monitoring section
+  - `README.md` VaporView waveform (VCD) section
+  - `docs/WOKWI_SETUP.md` steps for Teleplot and VaporView
+
+### Changed
+
+- Source layout and references aligned to current structure:
+  - Uno simulation source: `Wokwi/uno_main.cpp`
+  - Nano hardware source: `src/nano_main.cpp`
+- `platformio.ini` Nano environment now explicitly keeps:
+  - `arduino-libraries/LiquidCrystal@^1.0.7`
+- Documentation links/examples updated across `README.md`, `docs/API.md`, `docs/CONTRIBUTING.md`, and `docs/WORKLOG.md`.
+
+### Fixed
+
+- Markdown lint cleanup across project docs (headings, list spacing, fences, table style, and stale references).
+- Resolved Nano build break caused by missing `LiquidCrystal.h` by restoring explicit Nano `lib_deps` entry.
+
+### Planned Features
 
 - [ ] **ADC Calibration System** - Allow users to calibrate voltage reference and ADC offset
 - [ ] **I2C Address Auto-Detection** - Automatically scan and find connected LCD module
@@ -23,7 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [ ] **Noise Analysis** - Measure and report ADC noise statistics
 
 ### In Development
-
 
 - Serial output option with configurable baud rate
 - Dual-mode firmware (I2C and parallel in one build)
@@ -43,7 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Core Features
 
-
 - ✅ **Analog-to-Digital Conversion** - 10-bit ADC reading from potentiometer (pin A0)
 - ✅ **Voltage Calculation** - Real-time conversion of ADC values to 0-5V range
 - ✅ **I2C LCD Display** - 16x2 character LCD output via I2C interface (address 0x27)
@@ -54,14 +75,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Display Output
 
-
 - Line 1: Raw ADC value (0-1023)
 - Line 2: Calculated voltage with 3 decimal places (0.000-5.000V)
 - Update frequency: Every 200ms base + LED blink cycle
 - Clear formatting with proper alignment
 
 #### Hardware Support
-
 
 - **Arduino Uno** - Full support for Wokwi simulation
 - **Arduino Nano** - Full support for physical hardware deployment
@@ -71,7 +90,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Build System (PlatformIO)
 
-
 - `uno_sim` environment - Builds I2C LCD firmware for Wokwi simulation
 - `nanoatmega328` environment - Builds parallel LCD firmware for hardware
 - Source file filtering - Separate firmware variants per environment
@@ -80,7 +98,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `marcoschwartz/LiquidCrystal_I2C@^1.1.4` - I2C LCD support
 
 #### Wokwi Integration
-
 
 - `Wokwi/diagram.json` - Complete circuit diagram with all components
 - `Wokwi/wokwi.toml` - Firmware path configuration for simulator
@@ -92,7 +109,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Documentation (Initial)
 
-
 - README.md - Project overview and quick start
 - Build and run instructions
 - Wiring diagrams for I2C and parallel LCD
@@ -102,7 +118,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Code Quality
 
-
 - Clean, readable C++ code with meaningful variable names
 - Proper I2C LCD initialization sequence
 - Correct voltage conversion formula with comments
@@ -111,7 +126,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Specifications
 
 #### ADC (Analog-to-Digital Converter)
-
 
 ```cpp
 

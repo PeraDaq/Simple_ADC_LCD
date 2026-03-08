@@ -14,6 +14,7 @@ const int ledPin = 8;
 
 // The setup function runs once when you press reset or power the board
 void setup() {
+  Serial.begin(9600);
   // Initialize the LCD and set up the built-in LED pin
   lcd.begin(16, 2);
   // Clear the LCD screen
@@ -64,6 +65,13 @@ void loop() {
   lcd.print(voltage, 3);
   // Print spaces to clear any leftover characters from previous readings
   lcd.print(" V   ");  // clear leftover chars
+
+  // Teleplot over serial requires the ">" prefix.
+  Serial.print(">adc:");
+  Serial.println(adcValue);
+  Serial.print(">volt:");
+  Serial.println(voltage, 3);
+
   // Wait for 200 milliseconds before the next reading
   delay(200);
 }

@@ -8,9 +8,9 @@ This document provides detailed API documentation for the Simple ADC LCD project
 
 ### I2C LCD Version (Wokwi Simulation)
 
-**File**: `src/sketch.ino`
+**File**: `Wokwi/uno_main.cpp`
 
-#### `void setup()`
+#### `void setup()` (I2C)
 
 Initializes the I2C LCD display and LED pin.
 
@@ -44,7 +44,7 @@ pinMode(ledPin, OUTPUT);    // Configure pin 8 as output for LED
 
 ---
 
-#### `void loop()`
+#### `void loop()` (I2C)
 
 Main program loop that reads ADC, converts to voltage, displays on LCD, and blinks LED.
 
@@ -106,9 +106,9 @@ Line 1: "Volt: " + voltage (3 decimals) + " V"
 
 ### Parallel LCD Version (Hardware Nano)
 
-**File**: `Wokwi/main_do_not_use.cpp`
+**File**: `src/nano_main.cpp`
 
-#### `void setup()`
+#### `void setup()` (Parallel)
 
 Initializes parallel LCD in 4-bit mode and LED pin.
 
@@ -144,7 +144,7 @@ RS=12, E=11, D4=5, D5=4, D6=3, D7=2
 
 ---
 
-#### `void loop()`
+#### `void loop()` (Parallel)
 
 Main loop with ADC averaging and parallel LCD output.
 
@@ -183,7 +183,7 @@ adcValue = adcValue / 10;
 
 ## Global Variables
 
-### I2C Version (`src/sketch.ino`)
+### I2C Version (`Wokwi/uno_main.cpp`)
 
 ```cpp
 
@@ -193,7 +193,7 @@ const int ledPin = 8;                 // Digital output pin (LED)
 
 ```
 
-### Parallel Version (`Wokwi/main_do_not_use.cpp`)
+### Parallel Version (`src/nano_main.cpp`)
 
 ```cpp
 
@@ -374,26 +374,27 @@ Maximum: 2246ms (adcValue=1023) → 0.44 Hz
 
 ## Serial Output
 
-No serial output by default, but can be added:
+Serial telemetry is enabled by default for both firmware targets:
 
 ```cpp
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("ADC LCD Ready");
+  Serial.begin(9600);
 }
 
 void loop() {
-  Serial.print("ADC: ");
-  Serial.print(adcValue);
-  Serial.print(" Volt: ");
+  Serial.print(">adc:");
+  Serial.println(adcValue);
+  Serial.print(">volt:");
   Serial.println(voltage, 3);
-  // ... rest of code
 }
 
 ```
 
 **Monitor with**: `pio device monitor -b 9600`
+
+For Teleplot serial ingestion, the `>` prefix is required.
 
 ---
 

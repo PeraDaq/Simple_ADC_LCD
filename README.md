@@ -1,6 +1,6 @@
 # Simple ADC LCD
 
-<img width="1127" height="758" alt="snip" src="https://github.com/user-attachments/assets/73e00980-88f3-425f-bcf8-37e36074b7a0" />
+![Project Screenshot](https://github.com/user-attachments/assets/73e00980-88f3-425f-bcf8-37e36074b7a0)
 
 A small Arduino/PlatformIO project that reads an analog input from a potentiometer and shows both the raw ADC value and calculated voltage on a 16x2 I2C LCD display. Supports both Wokwi simulation (Arduino Uno) and physical hardware deployment (Arduino Nano).
 
@@ -140,10 +140,7 @@ Simple_ADC_LCD/
 Configured in `platformio.ini`:
 
 - **marcoschwartz/LiquidCrystal_I2C@^1.1.4** - I2C LCD control library
-
-Built into Arduino AVR framework (no explicit `lib_deps` needed):
-
-- **LiquidCrystal** - Parallel LCD control library for Nano firmware
+- **arduino-libraries/LiquidCrystal@^1.0.7** - Parallel LCD control library for Nano firmware
 
 ## 🔨 Build and Run (PlatformIO)
 
@@ -249,6 +246,47 @@ If simulation shows outdated behavior:
 - Rebuild with `pio run -e uno_sim`
 - Verify paths in `wokwi.toml`
 - Clear browser cache (Wokwi sometimes caches firmware)
+
+## 📈 Teleplot Monitoring
+
+Both firmware targets now emit Teleplot-compatible serial telemetry at `9600` baud.
+
+Telemetry format used in code:
+
+- `>adc:<value>`
+- `>volt:<value>`
+
+The leading `>` is required for Teleplot serial parsing.
+
+### Hardware Nano
+
+1. Upload Nano firmware:
+   `pio run -e nanoatmega328 -t upload`
+2. Open [teleplot.fr](https://teleplot.fr/) (or local Teleplot server/app).
+3. Select **Serial** mode and choose the Nano serial port at `9600` baud.
+4. Plot names should appear as `adc` and `volt`.
+
+### Wokwi simulation
+
+1. Run Wokwi simulation (`uno_sim`).
+2. Open the UART/Serial stream from Wokwi.
+3. Forward/copy Teleplot lines (prefixed with `>`) to Teleplot if needed.
+
+## 📉 VaporView Waveforms (VCD)
+
+Use Wokwi Logic Analyzer + VaporView to inspect digital timing (I2C/LED).
+
+1. Ensure `Wokwi/diagram.json` contains `wokwi-logic-analyzer`.
+2. Run simulation and stop it to export VCD.
+3. Open `Wokwi/wokwi.vcd` in VaporView.
+
+Expected I2C start behavior:
+
+- `SDA` falls while `SCL` is high (START condition).
+
+Tip for readable labels:
+
+- Set Logic Analyzer `channelNames` in `Wokwi/diagram.json` so traces show names like `SCL,SDA,LED,...` instead of generic `D0,D1,D2`.
 
 ## 🔍 Technical Details
 

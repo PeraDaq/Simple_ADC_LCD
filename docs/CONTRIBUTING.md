@@ -127,7 +127,7 @@ pio device monitor -b 9600
 
 ```bash
 
-git add src/sketch.ino docs/API.md
+git add Wokwi/uno_main.cpp docs/API.md
 git commit -m "Add ADC averaging feature for noise reduction
 
 - Implement 10-sample rolling average
