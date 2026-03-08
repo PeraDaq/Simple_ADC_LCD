@@ -9,10 +9,13 @@ A small Arduino/PlatformIO project that reads an analog input from a potentiomet
 Use this if you just want the fastest workflow:
 
 ```bash
+
 # 1) Build firmware for Wokwi simulation
+
 pio run -e uno_sim
 
 # 2) Flash hardware Nano (parallel LCD firmware)
+
 pio run -e nanoatmega328 -t upload
 ```
 
@@ -36,6 +39,7 @@ pio device monitor -b 9600
 ## 📦 Prerequisites
 
 ### Hardware Requirements
+
 - **Microcontroller**: Arduino Uno (simulation) or Arduino Nano (hardware)
 - **LCD Display**: 16x2 I2C LCD Module (address 0x27 or 0x3F)
 - **Potentiometer**: 10kΩ variable resistor
@@ -45,52 +49,58 @@ pio device monitor -b 9600
 - **Breadboard**: For prototyping
 
 ### Software Requirements
+
 - Python 3.7+
 - PlatformIO CLI: `pip install platformio`
 - VSC or Arduino IDE (optional, for standalone development)
 
 ### For Simulation
+
 - Wokwi.com account (free)
 - Modern web browser with JavaScript enabled
 
 ## 🔧 Hardware / Pin Mapping
 
 ### Potentiometer Wiring
-| Pin | Connection |
-|-----|-----------|
-| VCC | 5V |
-| GND | GND |
-| SIG | A0 (analog input) |
+
+|Pin|Connection|
+|---|---|
+|VCC|5V|
+|GND|GND|
+|SIG|A0 (analog input)|
 
 ### I2C LCD1602 Wiring
-| Pin | Connection | Notes |
-|-----|-----------|-------|
-| VCC | 5V | Power supply |
-| GND | GND | Ground |
-| SDA | A4 | Serial data (I2C) |
-| SCL | A5 | Serial clock (I2C) |
+
+|Pin|Connection|Notes|
+|---|---|---|
+|VCC|5V|Power supply|
+|GND|GND|Ground|
+|SDA|A4|Serial data (I2C)|
+|SCL|A5|Serial clock (I2C)|
 
 ### LED Wiring
-| Pin | Connection |
-|-----|-----------|
-| Anode (+) | D8 (with 220Ω resistor) |
-| Cathode (-) | GND |
+
+|Pin|Connection|
+|---|---|
+|Anode (+)|D8 (with 220Ω resistor)|
+|Cathode (-)|GND|
 
 ### Parallel LCD Wiring (Hardware Nano Only)
-| LCD Pin | Arduino Nano Pin |
-|---------|-----------------|
-| RS | D12 |
-| E | D11 |
-| D4 | D5 |
-| D5 | D4 |
-| D6 | D3 |
-| D7 | D2 |
-| VCC | 5V |
-| GND | GND |
+
+|LCD Pin|Arduino Nano Pin|
+|---|---|
+|RS|D12|
+|E|D11|
+|D4|D5|
+|D5|D4|
+|D6|D3|
+|D7|D2|
+|VCC|5V|
+|GND|GND|
 
 ## 🏗️ Project Structure
 
-```
+```text
 Simple_ADC_LCD/
 │
 ├── .gitignore                 # Git ignore rules
@@ -129,21 +139,26 @@ Simple_ADC_LCD/
 
 Configured in `platformio.ini`:
 
-- **arduino-libraries/LiquidCrystal@^1.0.7** - Parallel LCD control library
 - **marcoschwartz/LiquidCrystal_I2C@^1.1.4** - I2C LCD control library
+
+Built into Arduino AVR framework (no explicit `lib_deps` needed):
+
+- **LiquidCrystal** - Parallel LCD control library for Nano firmware
 
 ## 🔨 Build and Run (PlatformIO)
 
 ### Environment Mapping
 
-**Environment 1: Wokwi Simulation (Arduino Uno with I2C LCD)**
+### Environment 1: Wokwi Simulation (Arduino Uno with I2C LCD)
+
 - Board: Arduino Uno
 - Source: `Wokwi/uno_main.cpp`
 - LCD Type: I2C (LiquidCrystal_I2C library)
 - LCD Address: 0x27 (configurable to 0x3F)
 - Use Case: Quick testing, circuit verification
 
-**Environment 2: Hardware Nano (Physical Deployment)**
+### Environment 2: Hardware Nano (Physical Deployment)
+
 - Board: Arduino Nano (new bootloader)
 - Source: `src/nano_main.cpp`
 - LCD Type: Parallel (LiquidCrystal library)
@@ -153,22 +168,29 @@ Configured in `platformio.ini`:
 ### Common Commands
 
 ```bash
+
 # Build default environment (uno_sim)
+
 pio run
 
 # Build Wokwi simulation firmware explicitly
+
 pio run -e uno_sim
 
 # Build Nano firmware explicitly
+
 pio run -e nanoatmega328
 
 # Upload to connected Arduino Nano
+
 pio run -e nanoatmega328 -t upload
 
 # Monitor serial output at 9600 baud
+
 pio device monitor -b 9600
 
 # Clean build artifacts
+
 pio run --target clean
 ```
 
@@ -186,9 +208,11 @@ pio run -e nanoatmega328 -t upload
 ### Step-by-Step Guide
 
 1. **Build firmware** for Wokwi:
+
    ```bash
    pio run -e uno_sim
    ```
+
    This generates `.pio/build/uno_sim/firmware.hex` and `.firmware.elf`
 
 2. **Open Wokwi project**:
@@ -197,6 +221,7 @@ pio run -e nanoatmega328 -t upload
    - Verify `Wokwi/diagram.json` contains correct circuit
 
 3. **Configure firmware path** in `Wokwi/wokwi.toml`:
+
    ```toml
    [wokwi]
    firmware = "../.pio/build/uno_sim/firmware.hex"
@@ -215,10 +240,12 @@ pio run -e nanoatmega328 -t upload
 ### Firmware Paths
 
 The simulation uses these generated files:
+
 - `.pio/build/uno_sim/firmware.hex` - Hex firmware file
 - `.pio/build/uno_sim/firmware.elf` - ELF debug symbols
 
 If simulation shows outdated behavior:
+
 - Rebuild with `pio run -e uno_sim`
 - Verify paths in `wokwi.toml`
 - Clear browser cache (Wokwi sometimes caches firmware)
@@ -235,6 +262,7 @@ float voltage = adcValue * (5.0/1023.0);  // Voltage: 0-5V
 ```
 
 **ADC Specifications**:
+
 - Resolution: 10-bit (0-1023 values)
 - Reference Voltage: 5V (internal)
 - Input Range: 0-5V
@@ -246,7 +274,8 @@ float voltage = adcValue * (5.0/1023.0);  // Voltage: 0-5V
 **Line 2 Format**: `Volt: X.XXX V` (with 3 decimal places)
 
 Example output:
-```
+
+```text
 ADC: 512         
 Volt: 2.500 V    
 ```
@@ -262,6 +291,7 @@ Volt: 2.500 V
 Default I2C address: **0x27**
 
 If LCD doesn't respond:
+
 1. Scan for address with I2C scanner sketch
 2. Common addresses: 0x27, 0x3F, 0x20, 0x38
 3. Update in code: `LiquidCrystal_I2C lcd(0x3F, 16, 2);`
@@ -269,33 +299,39 @@ If LCD doesn't respond:
 ## 🐛 Troubleshooting
 
 ### LCD shows nothing
+
 - **Check Power**: Verify VCC/GND connections
 - **Backlight**: Adjust potentiometer on LCD module back
 - **I2C Address**: Try both 0x27 and 0x3F in code
 
 ### Wrong characters or corrupted display
+
 - **LCD Address**: Check I2C address in code
 - **LCD Type**: Verify 16x2 module (some use different formats)
 - **Power Supply**: Weak power can cause display corruption
 
 ### ADC value doesn't change
+
 - **Potentiometer Connection**: Verify SIG → A0
 - **Potentiometer Range**: Confirm it sweeps full 5V range
 - **Loose Connections**: Check breadboard contacts
 - **Bad Potentiometer**: Test with known working part
 
 ### LED blinks too fast/slow
+
 - **ADC Reading**: LED delay = ADC value in milliseconds
 - **Potentiometer Position**: Turn to middle for moderate speed
 - **LED Brightness**: Adjust resistor if too dim (use 120-470Ω)
 
 ### Wokwi simulation not updating
+
 - **Rebuild Firmware**: Run `pio run -e uno_sim`
 - **Clear Cache**: Hard refresh browser (Ctrl+Shift+R)
 - **Check wokwi.toml**: Verify firmware path is correct
 - **Restart Simulation**: Stop and start simulator again
 
 ### Build errors
+
 - **Library Missing**: Run `pio lib install` automatically
 - **Wrong Board**: Verify `board = uno` in platformio.ini
 - **Path Issues**: Ensure file paths don't have spaces
@@ -304,7 +340,7 @@ If LCD doesn't respond:
 
 The following commands were tested successfully:
 
-```
+```text
 ✓ pio run -e uno_sim              (Wokwi firmware build)
 ✓ pio run -e nanoatmega328        (Hardware firmware build)
 ✓ pio run -e nanoatmega328 -t upload  (Hardware upload)
