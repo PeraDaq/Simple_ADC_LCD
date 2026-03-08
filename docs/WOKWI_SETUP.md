@@ -6,7 +6,7 @@
 - Verify that potentiometer changes ADC and voltage.
 
 ## Files Used
-- `src/uno_sketch.ino`: simulation firmware source
+- `Wokwi/uno_main.cpp`: simulation firmware source
 - `Wokwi/diagram.json`: virtual circuit layout
 - `Wokwi/wokwi.toml`: firmware path mapping
 

@@ -109,10 +109,10 @@ Simple_ADC_LCD/
 │   └── WORKLOG.md
 │
 ├── src/
-│   └── uno_sketch.ino         # I2C LCD firmware (Wokwi simulation)
+│   └── nano_main.cpp          # Parallel LCD firmware (Hardware Nano)
 │
 └── Wokwi/
-   ├── nano_main.cpp          # Parallel LCD firmware (Hardware Nano)
+   ├── uno_main.cpp           # I2C LCD firmware (Wokwi simulation)
    ├── diagram.json           # Wokwi circuit diagram
    ├── libraries.txt
    ├── wokwi-project.txt
@@ -138,14 +138,14 @@ Configured in `platformio.ini`:
 
 **Environment 1: Wokwi Simulation (Arduino Uno with I2C LCD)**
 - Board: Arduino Uno
-- Source: `src/uno_sketch.ino`
+- Source: `Wokwi/uno_main.cpp`
 - LCD Type: I2C (LiquidCrystal_I2C library)
 - LCD Address: 0x27 (configurable to 0x3F)
 - Use Case: Quick testing, circuit verification
 
 **Environment 2: Hardware Nano (Physical Deployment)**
 - Board: Arduino Nano (new bootloader)
-- Source: `Wokwi/nano_main.cpp`
+- Source: `src/nano_main.cpp`
 - LCD Type: Parallel (LiquidCrystal library)
 - LCD Pins: RS=12, E=11, D4=5, D5=4, D6=3, D7=2
 - Use Case: Real hardware deployment
